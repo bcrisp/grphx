@@ -6,8 +6,18 @@ import org.apache.spark.SparkContext._
 import org.apache.spark._
 import org.apache.spark.graphx._
 import org.apache.spark.rdd.RDD
+import play.api.data._
+import play.api.data.Forms._
+
 
 object Application extends Controller {
+
+  val userForm = Form(
+    mapping(
+      "name" -> text,
+      "age" -> number
+    )(UserData.apply)(UserData.unapply)
+  )
 
   def index = Action {
 
