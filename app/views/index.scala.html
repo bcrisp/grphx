@@ -2,5 +2,8 @@
 
 @main("Welcome to Play") {
 
-
+@helper.form(action = routes.Entries.submit()) {
+  @helper.inputText(userForm("name"))
+  @helper.inputText(userForm("age"))
+}
 }

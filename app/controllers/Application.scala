@@ -8,16 +8,14 @@ import org.apache.spark.graphx._
 import org.apache.spark.rdd.RDD
 import play.api.data._
 import play.api.data.Forms._
-
+import models.UserData
 
 object Application extends Controller {
-
-  core class UserData(name:String, age:Int)
 
   val userForm = Form(
     mapping(
       "name" -> text,
-      "age" -> number
+      "age" -> text
     )(UserData.apply)(UserData.unapply)
   )
 

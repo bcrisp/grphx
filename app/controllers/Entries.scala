@@ -6,11 +6,23 @@ import org.apache.spark.SparkContext._
 import org.apache.spark._
 import org.apache.spark.graphx._
 import org.apache.spark.rdd.RDD
+import play.api.data._
+import play.api.data.Forms._
+import models.UserData
+
 /**
  * Created by brandoncrisp on 1/24/15.
  */
 object Entries extends Controller{
   def submit = Action {
+
+  val userForm = Form(
+    mapping(
+      "name" -> text,
+      "age" -> text
+    )(UserData.apply)(UserData.unapply)
+  )
+
 
     val conf = new SparkConf()
       .setAppName("Load graph")
@@ -38,7 +50,7 @@ object Entries extends Controller{
     // Count all the edges where src > dst
     val edges = graph.edges.filter(e => e.srcId > e.dstId).count
 
-    Ok(views.html.index("Your new application is now ready Grphax." + vertices))
+    Ok(views.html.index(userForm))
   }
 
 }
