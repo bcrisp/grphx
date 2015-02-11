@@ -12,6 +12,8 @@ import play.api.data.Forms._
 
 object Application extends Controller {
 
+  core class UserData(name:String, age:Int)
+
   val userForm = Form(
     mapping(
       "name" -> text,
@@ -47,7 +49,8 @@ object Application extends Controller {
     // Count all the edges where src > dst
     val edges = graph.edges.filter(e => e.srcId > e.dstId).count
 
-    Ok(views.html.index("Your new application is now ready Grphax." + vertices))
+    //Ok(views.html.index("Your new application is now ready Grphax." + vertices))\
+    Ok(views.html.index(userForm))
   }
 
 }
