@@ -6,12 +6,15 @@ import org.apache.spark.graphx._
 import org.apache.spark.rdd.RDD
  
 object PageRank {
-def runGraph : Long = {
-      val conf = new SparkConf()
-      .setAppName("Load graph")
-      .setMaster("local[2]")
-      .set("spark.driver.allowMultipleContexts", "true")
-      .setJars(SparkContext.jarOfClass(this.getClass).toList)
+
+
+  val conf = new SparkConf()
+    .setAppName("Load graph")
+    .setMaster("local[2]")
+    .set("spark.driver.allowMultipleContexts", "true")
+    .setJars(SparkContext.jarOfClass(this.getClass).toList)
+
+def runGraph (a: String, b: String) : Long = {
 
     val sc = new SparkContext(conf)
 
