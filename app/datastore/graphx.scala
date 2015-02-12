@@ -1,28 +1,13 @@
-package controllers
+package datastore
 
-import play.api._
-import play.api.mvc._
 import org.apache.spark.SparkContext._
 import org.apache.spark._
 import org.apache.spark.graphx._
 import org.apache.spark.rdd.RDD
-import play.api.data._
-import play.api.data.Forms._
-import models.UserData
-import datastore.PageRank
-
-object Application extends Controller {
-
-  val userForm = Form(
-    mapping(
-      "name" -> text,
-      "age" -> text
-    )(UserData.apply)(UserData.unapply)
-  )
-
-  def index = Action {
-
-    val conf = new SparkConf()
+ 
+object PageRank {
+def runGraph : Long = {
+      val conf = new SparkConf()
       .setAppName("Load graph")
       .setMaster("local[2]")
       .set("spark.driver.allowMultipleContexts", "true")
@@ -47,9 +32,5 @@ object Application extends Controller {
     val vertices = graph.vertices.filter { case (id, (name, pos)) => pos == "prof" }.count
     // Count all the edges where src > dst
     val edges = graph.edges.filter(e => e.srcId > e.dstId).count
-
-    //Ok(views.html.index("Your new application is now ready Grphax." + vertices))\
-    Ok(views.html.index(userForm))
-  }
-
-}
+    return edges
+}}
