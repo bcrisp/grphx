@@ -11,5 +11,6 @@ libraryDependencies ++= Seq(
   anorm,
   cache,
   ws,
-  "org.apache.spark" %% "spark-graphx" % "1.2.1"
+  "org.apache.spark" %% "spark-graphx" % "1.2.1",
+  "com.twitter" %% "cassovary-core" % "5.0.0"
 )
